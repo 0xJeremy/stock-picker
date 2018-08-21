@@ -1,6 +1,6 @@
-import requests
-import smtplib
-import sys
+import requests, smtplib
+import sys, time
+import json
 
 def email_data(data):
 	#server = smtplib.SMTP("smtp.gmail.com", 587)
@@ -13,8 +13,13 @@ def email_data(data):
 	
 def get_news(stock):
 	newsURL = "https://api.iextrading.com/1.0/stock/" + stock + "/news/last/5"
-	news = requests.get(url = newsURL)
-	return news
+	data = requests.get(url = newsURL)
+	news = data.json()
+	formatted_data = ""
+	for i in news:
+		formatted_data = formatted_data + i['headline'] + ":\n" + i['summary'] + "\n\t" + i['url'] + "\n\n"
+	print(formatted_data)
+	return formatted_data
 
 def check_move(stock, pos):
 	URL = "https://api.iextrading.com/1.0/stock/" + stock + "/quote/changePercent"
