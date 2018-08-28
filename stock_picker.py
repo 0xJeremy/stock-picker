@@ -43,6 +43,8 @@ def main():
 			 "pfe", "jnj", "utx", "cvx", "spy", "qqq", "dis", "vz", 
 			 "ko", "pg", "ibm", "xom", "mrk", "nflx", "stx", "isrg",}
 
+	get_news("goog")
+
 	for i in stock:
 		URL = "https://api.iextrading.com/1.0/stock/" + i + "/stats/year1ChangePercent"
 		print("Retrieving information: " + i + "...")
